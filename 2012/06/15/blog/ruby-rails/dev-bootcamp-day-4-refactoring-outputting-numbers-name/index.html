@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Dev Bootcamp Day 4: Refactoring & Outputting a number's name up to 1,000,000,000,000,000,000,000,000,000 | Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="x2012 x2012_06 x2012_06_15 x2012_06_15_blog x2012_06_15_blog_ruby-rails x2012_06_15_blog_ruby-rails_dev-bootcamp-day-4-refactoring-outputting-numbers-name x2012_06_15_blog_ruby-rails_dev-bootcamp-day-4-refactoring-outputting-numbers-name_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1>Dev Bootcamp Day 4: Refactoring & Outputting a number's name up to 1,000,000,000,000,000,000,000,000,000</h1>
+          <p>Today provided to hold some of the biggest challenges yet and yielded some of the most satisfying moments yet for me during Dev Bootcamp.</p>
+
+<p>My favorite quote of the day came from
+<a href="http://knowledgepile.net/">Robert</a>, who did a code review for the class on Ivan's and my method for the
+<a href="http://www.paulzaich.com/2012/06/12/ruby-rails/dev-bootcamp-day-1-the-journey-begins/">Pig Latin!</a> exercise:&gt;RegEx (Regular Expresssions) is like CTRL + F (Find) on crack.</p>
+
+<p>I spent the majority of the afternoon pairing with Noah who just finished up his first year of college. The first "ahah" moment happened when Noah and I were working through the In Words exercise in Socrates (change any integer from 1-999 into it's written equivalent e.g. "nine hundred ninety nine"). I had happened to have refactored it about 3 times previously, but Noah was just finishing up so we decided to start from the beginning and see how concise we could make the code. We were able to cut down the code by 10 lines out of 40.</p>
+
+<p>The second "aha" moment came for both of us as we reviewed recursion to write factorial and fibonacci sequence methods. Basically recursion means that you call the function within the function, and it finally made sense as we discussed what was happening on a step-by-step basis. I am glad to finally understand how recursion can be used programmatically.</p>
+
+<p><img src="/images/blog/2012-06-15-dev-bootcamp-day-4.jpg" alt="" /></p>
+
+<p>Factorial steps using recursion. The methods runs until it hits 1 and then returns up through the top.</p>
+
+<p>Finally, Noah and I jumped into using recursion to solve the exercise In Words for numbers up to 1 billion. This required us to break each set of digits into chunks and cycle through and add on the correct number label. It took us about 4 hours of coding, but we now have a working set of methods. We used an array to add the correct number labels (e.g. "billion") which can be loaded up to Centillion (10 ^ 303) if we so choose.</p>
+
+<pre><code>module InWords
+def in_words(*word_generated)
+num_array = self.to_s.split("")
+num_array.collect! { |x| x.to_i }
+hundreds_place = ""
+
+number_block = num_array.pop(num_array.length &gt; 3 ? 3 : num_array.length)
+word_generated &lt;&lt; word_generator(number_block, hundreds_place)
+#recursive call on in_words
+if num_array.empty?
+digit_label_splicer(word_generated.flatten).reverse.join.rstrip.lstrip
+
+else
+num_array.join.to_i.in_words(word_generated)
+end
+end
+
+def tens(digit)
+numbers_hash[digit]
+end
+
+def numbers_hash
+{ 0 =&gt; "", 1 =&gt; "one", 2 =&gt; "two", 3 =&gt; "three", 4 =&gt; "four", 5 =&gt; "five", 6 =&gt; "six", 7 =&gt; "seven", 8 =&gt; "eight", 9 =&gt; "nine",
+10 =&gt; "ten", 11 =&gt; "eleven", 12 =&gt; "twelve", 13 =&gt; "thirteen", 14 =&gt; "fourteen", 15 =&gt; "fifteen", 16 =&gt; "sixteen", 17 =&gt; "seventeen",
+18 =&gt; "eighteen", 19 =&gt; "nineteen", 20 =&gt; "twenty", 30 =&gt; "thirty", 40 =&gt; "forty", 50 =&gt; "fifty", 60 =&gt; "sixty", 70 =&gt; "seventy",
+80 =&gt; "eighty", 90 =&gt;"ninety"}
+end
+
+def label_array
+["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion" ]
+end
+
+def digit_label_splicer( array )
+i = 0
+array.collect! do |digit_segment|
+unless digit_segment == ""
+flag= digit_segment.rstrip.lstrip + " #{label_array[i]} "
+end
+i += 1
+flag
+end
+end
+
+def word_generator(number_array, hundreds_place)
+if number_array.length == 3 &amp;&amp; number_array[0] != 0
+hundreds_place = "#{numbers_hash[number_array.first]} hundred "
+end
+
+if number_array.join.to_i != 0
+remainder = number_array.join('').to_i % 100
+remainder &lt; 20 ? "#{hundreds_place}#{numbers_hash[remainder]}" : "#{hundreds_place}" + "#{numbers_hash[number_array[-2] * 10]} #{numbers_hash[number_array[-1]]}"
+else
+""
+end
+end
+
+end
+
+class Numeric
+include InWords
+end
+</code></pre>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>

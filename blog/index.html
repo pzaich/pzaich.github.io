@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="blog blog_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1></h1>
+          
+  <article class="index-article">
+    <h2><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a></h2>
+    <p><small>Jul 14, 2016</small></p>
+    <h3 id="release-notes">Release Notes:</h3>
+
+<p>A brand-new version of
+<a href="https://github.com/pzaich/doc_ripper">DocRipper</a> has been released to the wild. This will be the first release of several upcoming releases that will bring support for new file formats in DocRipper. The goal is to maintain a limited set of dependencies and where necessary only add dependencies that provide a high level of performance.</p>
+
+<h3 id="notes">Notes</h3>
+
+<ol>
+  <li>
+    <p><strong>*.sketch</strong>
+ files are now supported! All text content (text labels, artboard labels and layer labels) are returned as a concatenated string. I've kept the parsing simple to avoid breaking changes and conform to the spirit of DocRipper's mission to simply grab text from files.</p>
+  </li>
+  <li>
+    <p>*Cleans up module namespacing internally</p>
+  </li>
+</ol>
+
+<h3 id="parsing-sketch-files">Parsing Sketch Files</h3>
+
+<p>Extracting text from .sketch files proved to be an interesting excercise and required a couple of levels of digging into this proprietary format:</p>
+
+<p><strong>*Sketch files are sqlite3 databases</strong>
+ Thanks to this
+<a href="http://stackoverflow.com/questions/32413486/how-to-parse-sketch-files-in-python">SO question</a>, I was able to read .sketch files using Ruby's
+<a href="https://github.com/sparklemotion/sqlite3-ruby">sqlite3 adapter</a>. Sketch files contain a single payload "blob" which requires additional parsing.</p>
+
+<p><strong>*Binary Plist</strong>
+ The payload blob turns out to be binary plist which I was able to parse using
+<a href="https://github.com/ckruse/CFPropertyList">CFPropertyList</a>. The plist contains an array of objects that are parsed to build the sketch file. The array appears to contain flattened references with several objects (string, uuid, dictionary) sometimes describing a single "sketch" object. Finding text references was a matter of identifying the text objects in this array. I ultimately found that using a black list to remove non-text objects was the practical solution in this case. I could not identify a consistent "rule" or class identification for text labels in this object list. I hope to re-examine this approach in the future.</p>
+
+  </article>
+  <article class="index-article">
+    <h2><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a></h2>
+    <p><small>Jun 20, 2016</small></p>
+    <p>Sometimes you need to find the expected format of dates in your PostgreSQL database. You can find the database's default style using your psql console:</p>
+
+<h3 id="log-into-the-postgresql-console">Log into the postgresql console</h3>
+<p><code>psql</code></p>
+
+<h3 id="connect-to-your-database">connect to your database</h3>
+<p><code>\connect your_database_name</code></p>
+
+<h3 id="interact-with-your-database">interact...</h3>
+  </article>
+  <article class="index-article">
+    <h2><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a></h2>
+    <p><small>Mar 09, 2016</small></p>
+    <p>Run entire Rspec File</p>
+
+<p><code>CMD + SHIFT + T</code></p>
+
+<p>Run specific test or block (where cursor is selected)</p>
+
+<p><code>CMD + SHIFT + R</code></p>
+
+  </article>
+  <article class="index-article">
+    <h2><a href="/2015/05/03/blog/js/encapsulation-patterns-in-angularjs/">Encapsulation patterns in AngularJS</a></h2>
+    <p><small>May 03, 2015</small></p>
+    <p>Providing public and private design patterns in Angular.js</p>
+
+<p>The concept of Encapsulation is an important design pattern in most object-oriented programming designs. Determining which properties and methods should be accessible is a nice forcing function...</p>
+  </article>
+  <article class="index-article">
+    <h2><a href="/2014/11/13/blog/js/camelizing-and-decamelizing-restangular-http-responses-and-requests/">Making peace between server and client: Camelizing and de_camelizing Restangular data</a></h2>
+    <p><small>Nov 13, 2014</small></p>
+    <p>Sometimes you find that the API that you're interacting with via Angular $http requests uses the underscore convention rather than Javascript's camelCase convention. In this case, our Ruby on Rails app spits out blobs like the second example and we...</p>
+  </article>
+
+    <p><strong><a href="/blog/page/2/">More >></a></strong></p>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>

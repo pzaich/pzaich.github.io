@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Dev Bootcamp Day 18: My Personal SQL Cheat Sheet | Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="x2012 x2012_07 x2012_07_04 x2012_07_04_blog x2012_07_04_blog_ruby-rails x2012_07_04_blog_ruby-rails_dev-bootcamp-day-18-my-personal-sql-cheat-sheet x2012_07_04_blog_ruby-rails_dev-bootcamp-day-18-my-personal-sql-cheat-sheet_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1>Dev Bootcamp Day 18: My Personal SQL Cheat Sheet</h1>
+          <p>No Ruby today. No break for the Independence Day holiday (in case you were wondering). Hopefully we'll catch the fireworks later tonight. Instead we were focused on learning the basics of SQL. The basic commands used to traverse and return data with SQL was quite clean and straightforward and within 2 hours of progressing through 50 odd problems, I was able to join and parse through tables with linked foreign keys. I now see the relationship that good Relational database structure can play in well-designed Object Oriented applications. Thinking about the table structures will likely help inform me about the way that different class objects should be represented.</p>
+
+<p>Here were some of the SQL commands we learned today.</p>
+
+<p><strong>A simple way to select all rows and columns in a Table:</strong></p>
+
+<p><code>
+SELECT*FROM table_name
+</code></p>
+
+<p><strong>Select a specific column from a table:</strong></p>
+
+<p>You have a table Artists with columns Name an ID.</p>
+
+<p><code>
+SELECT name FROM artists
+</code></p>
+
+<p><strong>Return data from a table and return the data ordered by a specific column</strong></p>
+
+<p>For table employees and column hire_date.</p>
+
+<p><code>
+SELECT * FROM employees ORDER BY hire_date DESC
+</code></p>
+
+<p><strong>WHERE Statement</strong></p>
+
+<p><code>
+SELECT first_name, last_name FROM employees WHERE hire_date &lt; '2011-02-15'
+</code></p>
+
+<p><strong>LIKE Statement</strong></p>
+
+<p><code>
+SELECT name FROM artists WHERE name LIKE '%smith%'
+</code></p>
+
+<p><strong>Check for a number range and a varChar value at the same time:</strong></p>
+
+<p><code>
+SELECT * FROM invoices WHERE total &gt; 5 AND billing_state = 'NV' AND billing_city = 'Reno'
+</code></p>
+
+<p><strong>Check to see if a cell has it's value set to NULL in a row:</strong></p>
+
+<p><code>
+SELECT * FROM tracks WHERE composer IS NULL
+</code></p>
+
+<p><strong>Using an OR statement for multiple selection conditions:</strong></p>
+
+<p><code>
+SELECT * FROM invoices WHERE billing_city = 'Cupertino' or billing_city = 'Mountain View'
+</code></p>
+
+<p><strong>Give a count of values in a Column</strong></p>
+
+<p><code>
+SELECT unit_price, count(unit_price) FROM tracks GROUP BY unit_price
+</code></p>
+
+<p><strong>Reference two different tables values using table id's.</strong></p>
+
+<p><code>
+SELECT artists.name, albums.title FROM artists
+JOIN albums
+ON artists.id = artist_idORDER BY name
+</code></p>
+
+<p><strong>Combing multiple tables using their respective keys:</strong></p>
+
+<p><code>
+SELECT * FROM artists
+JOIN albums
+ON artists.id = albums.artist_id
+JOIN tracks
+ON tracks.album_id = albums.id
+WHERE tracks.name = 'Midnight'
+</code></p>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>

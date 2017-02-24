@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Object Literals, Maker Functions and Constructors in Javascript | Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="x2012 x2012_07 x2012_07_17 x2012_07_17_blog x2012_07_17_blog_js x2012_07_17_blog_js_object-literals-maker-functions-constructors-javascript x2012_07_17_blog_js_object-literals-maker-functions-constructors-javascript_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1>Object Literals, Maker Functions and Constructors in Javascript</h1>
+          <p>I had the priveledge of receiving a code review from
+<a href="https://twitter.com/mracus">Marcus Phillips</a> yesterday and wanted to share some take-aways from the evening. Marcus' generosity with his time (he spent almost 2 hours talking to me) still blows me away, and I hope I can reciprocate my own time to fellow developers in the future when I have knowledge to offer.Creating Different Types of Object Construction in Javascript
+I want to cover 3 different types of  object construction in Javascript:
+<strong>Object literals</strong>
+,
+<strong>Maker Functions</strong>
+, and
+<strong>Constructor Functions</strong>
+. I've had a lot of confusion about this subject over the past couple of weeks and want to clarify these construction definitions. Each has a specific design pattern to follow when being built.</p>
+
+<h3 id="object-literals">Object Literals</h3>
+<p>Object Literal use is the simplest form of object construction which is the direct definition of an object linked to the namespace of an existing object or the global namespace. When an object literal is defined, a single object is being created. Object literals are naturally best for cases where only one object with these attributes will ever need to be instantiated.</p>
+
+<p>Define a new object using the standard Javascript
+<strong>{}</strong>
+ curly braces. Using key value pair (like a standard hash), define any static values along with any functions that can be referenced through the object.</p>
+
+<p>Each method and value can be referenced using calls like so:</p>
+
+<p><code>objectName.keyName</code></p>
+
+<p>So for the example below, for task_counter, you would call
+<strong>taskList.task_counter</strong>
+. Similarly, for the function addTask, you would call
+<strong>taskList.addTask(description, date)</strong></p>
+
+<script src="https://gist.github.com/3131926.js"> </script>
+
+<h3 id="maker-functions">Maker Functions</h3>
+<p>Maker functions essentially create object literals that can be referenced using the variable they were set to each time they are called. Makers were popularized by Douglas Crockford who is a proponent of using
+<a href="http://javascript.crockford.com/prototypal.html">Prototypal inheritance</a> instead of Classical inheritance in Javascript. An object (referred to as
+<strong>instance</strong>
+ in the example below) is created at the start of the function, then the function defines functions and vars that will be defined to that object.</p>
+
+<p>A new object would be created using a call like so:</p>
+
+<script src="https://gist.github.com/3132059.js"> </script>
+
+<p>A Maker function for this call looks something like this:</p>
+
+<script src="https://gist.github.com/3132072.js"> </script>
+
+<h3 id="constructors">Constructors</h3>
+<p>Constructor functions are specialized functions that return a new object
+by default when
+<strong>new constructorName</strong>
+ is called. An explicit
+<strong>return</strong>
+ statement is not required like it is in the Maker function above. The keyword "this" then comes in and refers to the object being defined and created in this circumstance. At this point the new object and it's associated values and functions can be referenced in the same way that you would reference an object created by a maker function.</p>
+
+<script src="https://gist.github.com/3132201.js"> </script>
+
+<p>So what's the difference between a Maker function and a Constructor (function)? In many ways they are essentially the same, and I honestly do not know the subtleties right now. I have a feeling it has something to do with way that object inheritance works in the two types of object creation. I hope to delve into this more deeply in the coming week or two.</p>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>

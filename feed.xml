@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog Name</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://blog.url.com/</id>
+  <link href="http://blog.url.com/"/>
+  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2016-07-14T05:34:03-07:00</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>DocRipper 0.0.7 Release: .sketch files are now tap</title>
+    <link rel="alternate" href="http://blog.url.com/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/"/>
+    <id>http://blog.url.com/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/</id>
+    <published>2016-07-14T05:34:03-07:00</published>
+    <updated>2017-02-23T12:10:30-08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h3 id="release-notes"&gt;Release Notes:&lt;/h3&gt;
+
+&lt;p&gt;A brand-new version of
+&lt;a href="https://github.com/pzaich/doc_ripper"&gt;DocRipper&lt;/a&gt; has been released to the wild. This will be the first release of several upcoming releases that will bring support for new file formats in DocRipper. The goal is to maintain a limited set of dependencies and where necessary only add dependencies that provide a high level of performance.&lt;/p&gt;
+
+&lt;h3 id="notes"&gt;Notes&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;*.sketch&lt;/strong&gt;
+ files are now supported! All text content (text labels, artboard labels and layer labels) are returned as a concatenated string. I've kept the parsing simple to avoid breaking changes and conform to the spirit of DocRipper's mission to simply grab text from files.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;*Cleans up module namespacing internally&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id="parsing-sketch-files"&gt;Parsing Sketch Files&lt;/h3&gt;
+
+&lt;p&gt;Extracting text from .sketch files proved to be an interesting excercise and required a couple of levels of digging into this proprietary format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;*Sketch files are sqlite3 databases&lt;/strong&gt;
+ Thanks to this
+&lt;a href="http://stackoverflow.com/questions/32413486/how-to-parse-sketch-files-in-python"&gt;SO question&lt;/a&gt;, I was able to read .sketch files using Ruby's
+&lt;a href="https://github.com/sparklemotion/sqlite3-ruby"&gt;sqlite3 adapter&lt;/a&gt;. Sketch files contain a single payload "blob" which requires additional parsing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;*Binary Plist&lt;/strong&gt;
+ The payload blob turns out to be binary plist which I was able to parse using
+&lt;a href="https://github.com/ckruse/CFPropertyList"&gt;CFPropertyList&lt;/a&gt;. The plist contains an array of objects that are parsed to build the sketch file. The array appears to contain flattened references with several objects (string, uuid, dictionary) sometimes describing a single "sketch" object. Finding text references was a matter of identifying the text objects in this array. I ultimately found that using a black list to remove non-text objects was the practical solution in this case. I could not identify a consistent "rule" or class identification for text labels in this object list. I hope to re-examine this approach in the future.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Find your PostgreSQL database Datestyle</title>
+    <link rel="alternate" href="http://blog.url.com/2016/06/20/blog/find-your-postgresql-database-datestyle/"/>
+    <id>http://blog.url.com/2016/06/20/blog/find-your-postgresql-database-datestyle/</id>
+    <published>2016-06-20T07:46:02-07:00</published>
+    <updated>2017-02-23T12:09:44-08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Sometimes you need to find the expected format of dates in your PostgreSQL database. You can find the database's default style using your psql console:&lt;/p&gt;
+
+&lt;h3 id="log-into-the-postgresql-console"&gt;Log into the postgresql console&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;psql&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id="connect-to-your-database"&gt;connect to your database&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;\connect your_database_name&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id="interact-with-your-database"&gt;interact with your database&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;show datestyle;&lt;/code&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Sublime RubyTest Shortcuts</title>
+    <link rel="alternate" href="http://blog.url.com/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/"/>
+    <id>http://blog.url.com/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/</id>
+    <published>2016-03-09T08:13:26-08:00</published>
+    <updated>2017-02-22T22:56:49-08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Run entire Rspec File&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;CMD + SHIFT + T&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Run specific test or block (where cursor is selected)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;CMD + SHIFT + R&lt;/code&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Encapsulation patterns in AngularJS</title>
+    <link rel="alternate" href="http://blog.url.com/2015/05/03/blog/js/encapsulation-patterns-in-angularjs/"/>
+    <id>http://blog.url.com/2015/05/03/blog/js/encapsulation-patterns-in-angularjs/</id>
+    <published>2015-05-03T02:27:53-07:00</published>
+    <updated>2017-02-22T23:06:10-08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Providing public and private design patterns in Angular.js&lt;/p&gt;
+
+&lt;p&gt;The concept of Encapsulation is an important design pattern in most object-oriented programming designs. Determining which properties and methods should be accessible is a nice forcing function because it forces the programmer to think about how his or her could will be consumed.&lt;/p&gt;
+
+&lt;p&gt;If you’ve spent any time in the world of Javascript, you probably know that Javascript does not provide native support for defining public or private interfaces.&lt;/p&gt;
+
+&lt;p&gt;f you haven’t explored Javascript encapsulation in the past, encapsulation is most often used in Javascript
+&lt;a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects"&gt;Constructor functions&lt;/a&gt; which operate a bit like class definitions in Classical inheritance using the new Object() constructor pattern.&lt;/p&gt;
+
+&lt;p&gt;Encapsulation is typically achieved by defining local variables within the function object. These locals can only be referenced by other functions defined on the function object.&lt;/p&gt;
+
+&lt;p&gt;You can find a more detailed exposé of encapsulation in javascript
+&lt;a href="http://www.intertech.com/Blog/encapsulation-in-javascript/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="what-about-angularjs"&gt;What about AngularJS?&lt;/h3&gt;
+
+&lt;p&gt;Angular provides a number of ways to create javascript singleton objects that are available via dependency injection. Depending on who you talk to, 
+&lt;a href="http://codeofrob.com/entries/you-have-ruined-javascript.html"&gt;it’s a bit of a mess&lt;/a&gt;. At the end of the day though, AngularJS is just javascript and we can build encapsulation into our Angular factories and services using the same types of patterns.&lt;/p&gt;
+
+&lt;h3 id="factories"&gt;Factories&lt;/h3&gt;
+&lt;script src="https://gist.github.com/pzaich/0c8b039df3514ba0d1e7.js"&gt;&lt;/script&gt;
+
+&lt;h3 id="services"&gt;Services&lt;/h3&gt;
+&lt;script src="https://gist.github.com/pzaich/7a28ab4a750a5d9f6b10.js"&gt;&lt;/script&gt;
+
+&lt;h3 id="controllers"&gt;Controllers&lt;/h3&gt;
+
+&lt;p&gt;I find myself thinking a lot about what should be exposed publicly in my view controllers. As a beginner, it’s easy to just attach your functions and variables to $scope (or this if using &lt;em&gt;controller as&lt;/em&gt; syntax) and call it a day. But do you really need your view to have access to all of those functions? In most cases you don’t. Instead, assign these private functions or values to a local variable within your controller function.&lt;/p&gt;
+
+&lt;script src="https://gist.github.com/pzaich/38ece4135c37c149e474.js"&gt;&lt;/script&gt;
+
+&lt;p&gt;I often define a function that initializes the default values within the controller.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Making peace between server and client: Camelizing and de_camelizing Restangular data</title>
+    <link rel="alternate" href="http://blog.url.com/2014/11/13/blog/js/camelizing-and-decamelizing-restangular-http-responses-and-requests/"/>
+    <id>http://blog.url.com/2014/11/13/blog/js/camelizing-and-decamelizing-restangular-http-responses-and-requests/</id>
+    <published>2014-11-13T02:25:46-08:00</published>
+    <updated>2017-02-22T23:07:48-08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Sometimes you find that the API that you're interacting with via Angular $http requests uses the underscore convention rather than Javascript's camelCase convention. In this case, our Ruby on Rails app spits out blobs like the second example and we ultimately want it re-serialized like the first example. It's easy to create a confusing quagmire of under_score and camelCase functions and keys all over your project if you don't implement a way to translate object keys.&lt;/p&gt;
+
+&lt;script src="https://gist.github.com/pzaich/6439b691498ed15a638c.js"&gt;&lt;/script&gt;
+
+&lt;p&gt;We need some way to re-serialize this object's keys to camelCase after a response is received. Similarly, requests made to the server should be translated to under_score like the server is expecting. Fortunately the
+&lt;a href="https://github.com/mgonto/restangular"&gt;Restangular&lt;/a&gt; library makes this quite easy to accomplish.&lt;/p&gt;
+
+&lt;script src="https://gist.github.com/pzaich/dfd8dd0596deaf3ec029.js"&gt;&lt;/script&gt;
+
+&lt;p&gt;Restangular allows you to add response and/or request interceptors which allow you to modify your data before and after a $http request. Using the
+&lt;a href="https://github.com/domchristie/humps"&gt;Humps&lt;/a&gt; library to camelize and deCamelize, it was simple to modify the requests and responses handled by Restangular. Simply add a config block and use the provided RestangularProvider to add a responseInterceptor and a requestInterceptor:&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>How to specify a custom model class for your ActiveModel::Serializer 0.8 Serializer</title>
+    <link rel="alternate" href="http://blog.url.com/2014/09/11/blog/ruby-rails/how-to-manually-specify-your-serialized-model-in-activemodelserializers/"/>
+    <id>http://blog.url.com/2014/09/11/blog/ruby-rails/how-to-manually-specify-your-serialized-model-in-activemodelserializers/</id>
+    <published>2014-09-11T04:21:58-07:00</published>
+    <updated>2017-02-22T23:09:38-08:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;ActiveModel::Serializers gives you a lot of flexibility and modularity when it come to generating JSON for your Rails api. Serializer just work when the serializer is named after the model it references (
+MyModelNameSerializer). You also knew you could easily extend a base ActiveModelSerializer using class inheritance MyExtendedSerializer &amp;lt; MyModelSerializer. Recently, however, I found myself building a serializer that couldn't be named by ActiveModel::Serializer convention and couldn't inherit from the base serializer for that class.&lt;/p&gt;
+
+&lt;p&gt;So where does this gem find it's dependent class?&lt;/p&gt;
+
+&lt;p&gt;It turns out that the method
+&lt;a href="https://github.com/rails-api/active_model_serializers/blob/0-8-stable/lib/active_model/serializer.rb#L235"&gt;Serializer#model_class&lt;/a&gt;, defined on Serializer defines this behavior. It was relatively simple to override this behavior: Just override this method in your serializer so that the class method model_class refers to the parent class.&lt;/p&gt;
+
+&lt;script src="https://gist.github.com/pzaich/cd577f4d3355a65815cc.js"&gt;&lt;/script&gt;
+
+</content>
+  </entry>
+</feed>

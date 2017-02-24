@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Always test your app in IE8 | Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="x2013 x2013_02 x2013_02_21 x2013_02_21_blog x2013_02_21_blog_ruby-rails x2013_02_21_blog_ruby-rails_https-gotcha-in-ie8 x2013_02_21_blog_ruby-rails_https-gotcha-in-ie8_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1>Always test your app in IE8</h1>
+          <p>I had a particularly stark reminder today of why it is still important to do cross-browser testing. While IE8 has now
+<a href="http://thenextweb.com/apps/2012/10/01/internet-explorer-8-falls-25-market-share-firefox-15-passes-10-mark-chrome-loses-users/">fallen below 25%</a> market share, it still makes up a significant chunk of the traffic that hits our app each day. One simple bug in our code has made using the app in IE8 virtually impossible.</p>
+
+<p>What was that? We were loading a default html5 shim in http instead of https.</p>
+
+<p><code>
+&lt;!--[if lt IE 9]&gt;
+  &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+</code></p>
+
+<p>Every time you loaded our site over SSL you would get this
+<a href="http://blog.httpwatch.com/2009/04/23/fixing-the-ie-8-warning-do-you-want-to-view-only-the-webpage-content-that-was-delivered-securely/">security warning</a>. Every. Single. Time.</p>
+
+<p><img src="/images/blog/2013-02-21-always-test-your-app-in-i8.png" alt="" /></p>
+
+<p>A simple 1 character change from 'http' to 'https' on the shim was all that was needed to fix the problem, but it had been lurking there for several weeks unseen because we only were testing on "modern browsers".</p>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>

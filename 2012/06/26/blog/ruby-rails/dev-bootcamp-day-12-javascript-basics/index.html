@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Dev Bootcamp Day 12: Javascript Basics | Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="x2012 x2012_06 x2012_06_26 x2012_06_26_blog x2012_06_26_blog_ruby-rails x2012_06_26_blog_ruby-rails_dev-bootcamp-day-12-javascript-basics x2012_06_26_blog_ruby-rails_dev-bootcamp-day-12-javascript-basics_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1>Dev Bootcamp Day 12: Javascript Basics</h1>
+          <p>I'm writing now in the hope that I can close out a relatively early night. That last few days have been busy and I have a feeling my dependence on caffeine will become unsustainable if I try to do it over the next seven weeks!</p>
+
+<p>Today was a bit more of a mashup and we tackled a number of different subjects. It started out with a test/assessment designed by the staff that was taken on an individual basis by each of the students. Overall, it tested most of the basic Ruby concepts and I was happy to find that the concepts had generally stuck and everything felt pretty straightforward (after working through these concepts week 1, it was nice to feel comfortable).</p>
+
+<p>I did make some nice discoveries about the finer points of using the #select method on an array and learned that regular expressions could be used to parse through an array to retrieve an array of results. This is a nice method to know about and stick in the back of my mind.</p>
+
+<p>I also discovered that you can use #collect_with_index much like you would use #each_with_index on an array. This made parsing through each element way quicker and cleaner than having to set a local variable.</p>
+
+<pre><code>class String
+  def fun_string!
+    new_string = self.split('').collect.with_index do |letter, i|
+      if i.even? &amp;&amp; i != 0
+letter.upcase
+      else
+letter
+      end
+    end
+    new_string.reverse.join('')
+  end
+end
+</code></pre>
+
+<p>I spent a little time reading through two docs on Rspec, TDD and BDD development before lunch in preparation for more on this tomorrow. The rest of the day was focused on Javascript and running through the basic exercises we did previously in Ruby. Everything was fairly straightforward until we hit defining Classes in Javascript.</p>
+
+<p><img src="/images/blog/2012-06-26-dev-bootcamp-day-12.jpg" alt="" />
+Working on JS on a beautiful day with Coit Tower out the window.</p>
+
+<p>It turns out that Javascript doesn't define classes like Ruby. Javascript is leaves it up to you to create classes if you so choose by using Objects that reference different functions inside that object. It actually makes Javascript more flexible in some regards (Javascript fanboys please stand up). I'm still understanding the finer points here.</p>
+
+<p>Javascript is definitely leaner in its library of default methods and Brick and I spent time in the afternoon struggling making a new each method in Javascript. We were really close but kept getting the syntax wrong. It sort of felt like trying to write without knowing the words. It definitely does not help that there are so many wrong answers when you search for Javascript related answers on Google.</p>
+
+<p><a href="http://marcusphillips.com/">Marcus Phillips</a> was able to quickly refactor and correct our errors for the entire group at the end of our Javascript night and I left tonight feeling a lot closer to understanding how to solve these basic concepts like Objects and passing function blocks. Time to get some sleep (and dream of code!).</p>
+
+<p>Here's the custom each method in Javascript:</p>
+
+<pre><code>Array.prototype.new_each = function(callback){
+  for (var i = 0; i &lt; this.length; i++){
+    var element = this[i];
+    callback(element);
+  }
+  return this;
+}
+</code></pre>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="page page_5 page_5_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1></h1>
+              <p><strong><a href="/page/4/"><< Back</a></strong></p>
+
+  <article class="index-article">
+    <h2><a href="/2012/07/16/blog/js/using-localstorage-build-simple-persistent-apps-javascript/">Using LocalStorage to build simple persistent apps in Javascript</a></h2>
+    <p><small>Jul 16, 2012</small></p>
+    <p>Storing data for use later in the browser has always required the creation of a backend, server-side side database (with the exception of cookies).  No more. With the advent of HTML5 and client-side storage in modern browsers, it is now possible to save everything locally to your user’s browser for quick-loading, light-weight applications. I recently built a
+<a href="https://github.com/pzaich/floo-todo">small sample todo application</a> that uses localStorage and will walk through the steps I took to save and retrieve data.</p>
+
+<p><img src="/images/blog/2012-07-16-floo-todo.png" alt="" /></p>
+
+<h2 id="totalstorage">$.totalStorage</h2>
+<p>I am using the jQuery library and was quickly able to find the
+<a href="http://upstatement.com/blog/2012/01/jquery-local-storage-done-right-and-easy/">$.totalStorage plugin</a> generously created by Upstatement.  It abstracts the entire storage process out to a single function that can take multiple arguments. It also can provide functionality for browsers that do not support localStorage (IE7 and below I believe) when used with the
+<a href="https://github.com/carhartl/jquery-cookie/">jQuery cookie plugin</a>. I haven’t had a chance to check out how well this functionality works.</p>
+
+<h2 id="everything-is-a-key-value-pair">Everything is a key, value pair</h2>
+<p>It turns out the localStorage stores everything to the client in an object hash. Like any object in Javascript, this means that you can assign values like strings or integers to these keys but you can also assign objects as well.</p>
+
+<script src="https://gist.github.com/3126507"></script>
+
+<p>In my case this was exactly what I needed. I  was working with a List item constructor and a Task item constructor. If I could simply save the List object to local storage and retrieve its tasks each time the page was refreshed, I would have a persistent todo list.</p>
+
+<h2 id="save-your-objects">Save your objects</h2>
+<p>To actually save your objects, you will need to use the localStorage.setItem function in localStorage. With the  $.totalStorage plugin, simply call the function $.totalStorage with a specified key and value pair.</p>
+
+<script src="https://gist.github.com/3126360.js"> </script>
+
+<p>This became a save function that I could call whenever an action was performed on my list.</p>
+
+<h2 id="retrieve-your-objects-from-localstorage">Retrieve your objects from localStorage**</h2>
+<p>Retrieving your objects from the browser’s database turns out to be just as easy with  the $.totalStorage plugin. Simply call the same function, this time with only the key to return the value referenced by that key.</p>
+
+<script src="https://gist.github.com/3126451.js"> </script>
+
+<h2 id="recreate-the-objects-in-memory">Recreate the objects in memory</h2>
+<p>Retrieving the objects is only part of the story, however. While the objects are accessible, the list object and the contained task objects will no longer be associated with their constructor functions and only contain the instance variables associated with these objects (none of the functions now exist as part of the object). We can fix this by looping through the object returned at “savedList” and recreating each task object.</p>
+
+<p>First a recreate the List object:</p>
+
+<script src="https://gist.github.com/3126463.js"> </script>
+
+<p>Then I check the “savedList” key to see if an object exists:
+<script src="https://gist.github.com/3126470.js"> </script></p>
+
+<p>If it does, listSaver.retrieve is called and a new tasks are created using the data stored in the “savedList” object:</p>
+
+<script src="https://gist.github.com/3126480.js"> </script>
+
+<h2 id="uses">Uses</h2>
+<p>So where should you use localStorage? I think it’s mostly useful for situations where you want to reduce bandwidth as much as possible and where saving user data is nice but not essential. Since the db is dependent on the uri being accessed, you will need to be using urls that are static for your specific user (if logins are required). All storage keys are only accessible on that specific URI. It would be a great way to remember  user form details on a partially completed form or for settings that do not require sign-in as well.</p>
+
+  </article>
+  <article class="index-article">
+    <h2><a href="/2012/07/12/blog/ruby-rails/dev-bootcamp-24/">Dev Bootcamp 24: To Drive or not to Drive? </a></h2>
+    <p><small>Jul 12, 2012</small></p>
+    <p>Guess what? My team just published our first app today, all by ourselves! We were sick of dealing with command line UI's and the nastiness that they produce and opted to try to learn Sinatra over the past day. What was the goal? Produce an app that...</p>
+  </article>
+  <article class="index-article">
+    <h2><a href="/2012/07/11/blog/ruby-rails/dev-bootcamp-day-23-youve-fired/">Dev Bootcamp Day 23: You've been fired!</a></h2>
+    <p><small>Jul 11, 2012</small></p>
+    <p>Expect the unexpected. That is what I have come to expect over the past 5 weeks. Today was no exception. After working for the past two days on a Ruby method parser, I was summarily "fired" from my existing team and moved to a team that is working...</p>
+  </article>
+  <article class="index-article">
+    <h2><a href="/2012/07/10/blog//dev-bootcamp-days-21-22-the-client/">Dev Bootcamp Days 21 & 22: The Client & The Ripper</a></h2>
+    <p><small>Jul 10, 2012</small></p>
+    <p>This week is dedicated to working on a larger scale project with an imaginary client (played by one of the instructors). After being split at random into teams, Patrick, Tom, John and I were able to peruse the various project options with each client...</p>
+  </article>
+  <article class="index-article">
+    <h2><a href="/2012/07/09/blog/js/dont-build-javascript-constructors-work-chrome/">Don't build Javascript constructors that only work in Chrome</a></h2>
+    <p><small>Jul 09, 2012</small></p>
+    <p>I learned a valuable lesson (and reminder) this weekend while I was finishing up my javascript todo app. Everything was progressing along smoothly and I was feeling quite proud of myself when I was able to use the jQuery plugin
+<a href="http://upstatement.com/blog/2012/01/jquery-local-storage-done-right-and-easy/">TotalStorage</a> to start...</p>
+  </article>
+
+    <p><strong><a href="/page/6/">More >></a></strong></p>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>

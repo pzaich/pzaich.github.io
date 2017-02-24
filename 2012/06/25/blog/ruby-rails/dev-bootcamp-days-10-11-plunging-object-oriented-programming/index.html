@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head data-template-set="html5-reset-wordpress-theme" id="www.paulzaich.com" profile="http://gmpg.org/xfn/11">
+  <meta charset="UTF-8"><!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Dev Bootcamp Day(s) 10 & 11: Plunging into Object Oriented Programming | Paul Zaich</title>
+  <meta content=" &lt;p&gt;I&#8217;m passionate about all facets of web application development.&lt;/p&gt;" name="description">
+  <meta content="eDHIEsLlUK1d1lsqIQPoCa2eBWhVdKsWnpSqSXWdLoY" name="google-site-verification">
+  <meta content="Paul Zaich" name="author">
+  <meta content="Copyright Paul Zaich 2011. All Rights Reserved." name="Copyright">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="/stylesheets/site.css" rel="stylesheet" />
+  <script src="/javascripts/modernizr-1.7.min.js"></script>
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+</head>
+<body class="x2012 x2012_06 x2012_06_25 x2012_06_25_blog x2012_06_25_blog_ruby-rails x2012_06_25_blog_ruby-rails_dev-bootcamp-days-10-11-plunging-object-oriented-programming x2012_06_25_blog_ruby-rails_dev-bootcamp-days-10-11-plunging-object-oriented-programming_index">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <div id="header">
+        <div class="content-inner-wrapper">
+          <a class="logo" href="/"><span>Z</span></a>
+        </div>
+      </div>
+      <div class="content-inner-wrapper home" id="home">
+        <div class='mobile-hidden'>
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+        <div class="main-col">
+          <h1>Dev Bootcamp Day(s) 10 & 11: Plunging into Object Oriented Programming</h1>
+          <p>The last few days of camp have been some of the toughest yet, but have really helped me to start putting some pieces into place. On Thursday last week, I sat down to work with Phil on a simple To Do app and found myself struggling to understand how our To Do List class interacted with the Task Item class which defined each item in the To Do List. I didn't feel like I was able to contribute much that afternoon as we tried to work through the problem. On top of that, the To Do app was our first big foray into Object Oriented programming and I think we both were struggling to fully embrace this type of design. We must have changed our direction 3 times before really achieving we wanted to implement. I finally felt like OO design began to "click" Thursday night while I tried to refactor our existing code to make it more OO and ended up pretty much starting over from scratch.</p>
+
+<p>The number one rule for me has been to think about the 
+<strong>scope</strong>
+ of each object and which object should know what piece of information. Breaking the different methods operating on each object has really started to feel more comfortable and much less convoluted then functional style programming. It provides a good framework for piecing your methods into short, concise methods that act on the class.</p>
+
+<p><img src="https://c1.staticflickr.com/5/4055/4504469260_43ea697e9d_b.jpg" alt="" /></p>
+
+<p>http://www.flickr.com/photos/the-consortium/4504469260/</p>
+
+<p>Today was our biggest challenge yet: Create a Sudoku Puzzle solver. To be honest, I was a little intimidated when were were assigned this problem. The puzzle was clearly going to require the most advanced algorithm work yet and would also test my understanding of Object Oriented design.
+<a href="http://brettcamarda.com/">Brett</a> and I teamed up and did a thorough job of trying to has through all the steps required to solve the puzzle and where each of these methods should exist. The toughest piece turned out to be figuring out how to parse the number sets in the grid into different arrays for the columns, rows and 9-number sub-grids. We were able to use 3 classes, a GameBoard class, a Container class (for the cols, rows and sub-grids) and a Cell class to define the dynamics of the game board. We checked each cell for the overlapping values in it's row, column and sub-grid and subtracted this combined array from the possible values [1..9]. Turns out that this will work for phase 1 of the project and will only solve simple Sudoku!</p>
+
+<p>On to phase 2 tomorrow where we will need to develop a recursive method with branching that allows the algorithm to guess the value of the cell when more than one possible value still exists.</p>
+
+        </div>
+        <div class="desktop-hidden">
+          <div id="sidebar">
+  <section>
+    <img src="/images/pz-headshot-2017-sm.jpg" alt="Me" class="sidebar-img" />
+    <h4>Hi there!</h4>
+    <p>I'm Paul Zaich. Software Engineer <a href="http://www.learnup.com/">@Learnup</a>. Formerly co-founder <a href="https://workhands.us">@workhands</a>. Also <a href="https://www.25x50swim.com/">25x50</a>. Utilizing technology to empower labor.</p>
+    <p>I live in San Francisco, CA with my lovely wife <a href="http://erinzaich.com">Erin</a> and our children Bennett and Delphine. You can find me surfing at Ocean Beach in my spare time.</p>
+    <p></p>
+    <div>
+      <a href="https://twitter.com/pzaich">Twitter</a>
+    </div>
+    <div>
+      <a href="https://github.com/pzaich">Github</a>
+    </div>
+    <p></p>
+  </section>
+  <section>
+    <h4>Recent Posts</h4>
+    <ul>
+        <li><a href="/2016/07/14/blog/ruby-rails/docripper-0-0-7-release-sketch-files-are-now-tap/">DocRipper 0.0.7 Release: .sketch files are now tap</a> <span>Jul 14</span></li>
+        <li><a href="/2016/06/20/blog//find-your-postgresql-database-datestyle/">Find your PostgreSQL database Datestyle</a> <span>Jun 20</span></li>
+        <li><a href="/2016/03/09/blog/ruby-rails/sublime-rubytest-shortcuts/">Sublime RubyTest Shortcuts</a> <span>Mar  9</span></li>
+    </ul>
+  </section>
+</div>
+
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="footer-wrapper">
+      <div id="footer-inner-wrapper">
+        <footer class="source-org vcard copyright" id="footer">
+          <div id="contact-holder">
+            <div class="clear"></div>
+          </div><small>&copy;2017 Paul Zaich</small>
+        </footer>
+      </div>
+    </div><!-- here comes the javascript -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17353369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=4.5.6' type='text/javascript'>
+    </script>
+    <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js">
+    </script> <script src="/javascripts/site.js"></script>
+  </div>
+</body>
+</html>
